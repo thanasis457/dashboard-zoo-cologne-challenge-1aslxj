@@ -71,9 +71,9 @@ You should find the updated documentation in the README file!
 There's a failing test that for the age calculation helper. Can you figure out what is broken in the implementation or the test it is and resolve the problem? All zookeepers are really interested in what is going on here.
 
 // Your solution
-We see from the comment on the `helper.test.ts` file that we need to make round up the age. With this give and by looking at the test, we should assume that once a year completes we round up to the next age. Eg. After 14 years, th zoo should be considered now 15 years old, 8.3 years should round up to 9 years old etc etc.
+We see from the comment on the `helper.test.ts` file that we need to make round up the age. With this give and by looking at the test, we should be very conservative and round up to the highest age possible. So, once a year completes we round up to the next age. Eg. After 14 years, the animal should be considered now 15 years old, 8.3 years should round up to 9 years old etc etc.
 
-Changed:
+Changes (in the `helpers.ts` file):
 
 1. Use the `Math.ceil` function to round up numbers
 2. Update `today.getTime() - birthdate.getTime()` to `today.getTime() - birthdate.getTime() + 1` since, as I already descibed, we are very conservative. The moment a year completes we print the next acceptable age.
@@ -90,6 +90,11 @@ The zookeepers report that the table is incomplete and different than usually. M
 Please fix the two above problems and outline what was necessarry to do so.
 
 // Your solution
+Changes:
+
+- In `TheAnimalTable.vue`, the component where the table is implemented, I added a 'Name' column right after 'Species' on the head (`thead`) of the table. On the body now (`tbody`), I needed to add the information which would fill the 'Name' column, so I added `<td>{{ name }}</td>` while also updating the props of the for loop to include the `name` attribute.
+- The sorting happens at the beginning using a custom comparator function. All I needed to do was change this function to what I wanted to sort - which was names. So I changed the sorting function of `animalsSortedByName` to `animalA.name > animalB.name`. (Note: in JS math comparators work on strings)
+- For the age, I replaced `birthdate` with `calculateAgeInYears(birthdate)` but this fails. The `calculateAgeInYears` expects a Date object. So all I had to do was change this into: `calculateAgeInYears(new Date(birthdate))`. Done
 
 ### Task 6: UI Feature 1
 
