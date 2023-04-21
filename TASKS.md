@@ -64,12 +64,19 @@ You got it to work! Nice, now the basic functionality is back for the zookeepers
 Add your solution below, either as an inline text or link to new documentation file(s) you've created.
 
 // Your solution
+You should find the updated documentation in the README file!
 
 ### Task 4: Test fixing
 
 There's a failing test that for the age calculation helper. Can you figure out what is broken in the implementation or the test it is and resolve the problem? All zookeepers are really interested in what is going on here.
 
 // Your solution
+We see from the comment on the `helper.test.ts` file that we need to make round up the age. With this give and by looking at the test, we should assume that once a year completes we round up to the next age. Eg. After 14 years, th zoo should be considered now 15 years old, 8.3 years should round up to 9 years old etc etc.
+
+Changed:
+
+1. Use the `Math.ceil` function to round up numbers
+2. Update `today.getTime() - birthdate.getTime()` to `today.getTime() - birthdate.getTime() + 1` since, as I already descibed, we are very conservative. The moment a year completes we print the next acceptable age.
 
 ### Task 5: UI Fixing and Improvement
 
